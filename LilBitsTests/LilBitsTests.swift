@@ -21,31 +21,19 @@ class LilBitsTests: XCTestCase {
         super.tearDown()
     }
 
-    private func setupExpectation() -> XCTestExpectation {
-        let e = self.expectationWithDescription("asyncExpectation")
+    func testGetPreviousTrackSucceedsWithTrack() {
+        let e = self.expectationWithDescription("testGetPreviousTrackSucceedsWithTrack")
+        DownloadQueue.sharedInstance.getNextTrack { track in
+            XCTAssertNotNil(track)
+            dispatch_async(dispatch_get_main_queue(), {
+                DownloadQueue.sharedInstance.getPreviousTrack { track in
+                    XCTAssertNotNil(track)
+                    e.fulfill()
+                }
+            })
+        }
         self.waitForExpectationsWithTimeout(120) { error in
             print("Error: \(error)")
-        }
-        return e
-    }
-
-    private func fulfillExpectation(expectation: XCTestExpectation) {
-        expectation.fulfill()
-    }
-
-    func testGetNextTrackSucceedsWithTrack() {
-        let e = setupExpectation()
-        DownloadQueue.sharedInstance.getNextTrack { [weak self] track in
-            XCTAssertNotNil(track)
-            self?.fulfillExpectation(e)
-        }
-    }
-
-    func testGetPreviousTrackSucceedsWithTrack() {
-        let e = setupExpectation()
-        DownloadQueue.sharedInstance.getPreviousTrack { [weak self] track in
-            XCTAssertNotNil(track)
-            self?.fulfillExpectation(e)
         }
     }
 }
