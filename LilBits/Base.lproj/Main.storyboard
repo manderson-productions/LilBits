@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Player View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PlayerViewController" customModule="LilBits" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,83 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Zk-Tb-BGL" userLabel="player_container">
+                                <rect key="frame" x="111" y="50" width="378" height="317"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfh-YH-cUe" userLabel="artist_name_label">
+                                        <rect key="frame" x="0.0" y="0.0" width="378" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mN-F7-Fln" userLabel="track_name_label">
+                                        <rect key="frame" x="0.0" y="20.5" width="378" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hBg-9t-laS" userLabel="cover_image_view">
+                                        <rect key="frame" x="0.0" y="41" width="378" height="246"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVi-dd-be5" userLabel="controls_container">
+                                        <rect key="frame" x="0.0" y="287" width="378" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQq-xA-TnQ" userLabel="previous_button">
+                                                <rect key="frame" x="0.0" y="0.0" width="126" height="30"/>
+                                                <state key="normal" title="&lt;&lt;"/>
+                                                <connections>
+                                                    <action selector="previousButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lHL-dW-ZW6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zX5-An-nsL" userLabel="play_pause_button" customClass="PlayPauseButton" customModule="LilBits" customModuleProvider="target">
+                                                <rect key="frame" x="126" y="0.0" width="126" height="30"/>
+                                                <connections>
+                                                    <action selector="playPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ihZ-Q0-F7D"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBe-F6-fLJ" userLabel="next_button">
+                                                <rect key="frame" x="252" y="0.0" width="126" height="30"/>
+                                                <state key="normal" title="&gt;&gt;"/>
+                                                <connections>
+                                                    <action selector="nextButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P3g-aA-Ze6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="zX5-An-nsL" firstAttribute="width" secondItem="wQq-xA-TnQ" secondAttribute="width" id="24l-uU-bS4"/>
+                                            <constraint firstItem="LBe-F6-fLJ" firstAttribute="width" secondItem="wQq-xA-TnQ" secondAttribute="width" id="EhW-6w-0dQ"/>
+                                            <constraint firstAttribute="height" constant="30" id="Knx-uH-BrF"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="378" id="0Cu-k1-xxd"/>
+                                    <constraint firstAttribute="height" constant="317" id="8gX-ls-vGa"/>
+                                    <constraint firstItem="hVi-dd-be5" firstAttribute="leading" secondItem="6Zk-Tb-BGL" secondAttribute="leading" id="A0G-LG-17B"/>
+                                    <constraint firstAttribute="bottom" secondItem="hVi-dd-be5" secondAttribute="bottom" id="Dpx-R3-Bhe"/>
+                                    <constraint firstAttribute="trailing" secondItem="hVi-dd-be5" secondAttribute="trailing" id="bsZ-Ps-pVO"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Zk-Tb-BGL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RpA-Uj-Sjl"/>
+                            <constraint firstItem="6Zk-Tb-BGL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="sNw-Co-7L7"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="artistNameLabel" destination="qfh-YH-cUe" id="KA2-xQ-ara"/>
+                        <outlet property="coverImageView" destination="hBg-9t-laS" id="xHj-NZ-rCx"/>
+                        <outlet property="nextButton" destination="LBe-F6-fLJ" id="7RN-Ne-Med"/>
+                        <outlet property="playPauseButton" destination="zX5-An-nsL" id="Mi4-wY-DJ2"/>
+                        <outlet property="previousButton" destination="wQq-xA-TnQ" id="gEY-Uw-9FZ"/>
+                        <outlet property="trackNameLabel" destination="5mN-F7-Fln" id="29V-VE-p2N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="320" y="389"/>
         </scene>
     </scenes>
 </document>
