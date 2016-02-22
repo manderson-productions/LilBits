@@ -20,17 +20,32 @@ class LilBitsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    private func setupExpectation() -> XCTestExpectation {
+        let e = self.expectationWithDescription("asyncExpectation")
+        self.waitForExpectationsWithTimeout(120) { error in
+            print("Error: \(error)")
+        }
+        return e
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+
+    private func fulfillExpectation(expectation: XCTestExpectation) {
+        expectation.fulfill()
+    }
+
+    func testGetNextTrackSucceedsWithTrack() {
+        let e = setupExpectation()
+        DownloadQueue.sharedInstance.getNextTrack { [weak self] track in
+            XCTAssertNotNil(track)
+            self?.fulfillExpectation(e)
         }
     }
-    
+
+    func testGetPreviousTrackSucceedsWithTrack() {
+        let e = setupExpectation()
+        DownloadQueue.sharedInstance.getPreviousTrack { [weak self] track in
+            XCTAssertNotNil(track)
+            self?.fulfillExpectation(e)
+        }
+    }
 }

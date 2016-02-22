@@ -28,9 +28,16 @@ class LilBitsUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPlayerStateIsPaused() {
+        let app = XCUIApplication()
+        app.buttons["Pause"].tap()
+        XCTAssert(app.buttons["Play"].label == "Play")
     }
-    
+
+    func testPlayerStateIsPlaying() {
+        let app = XCUIApplication()
+        app.buttons["Pause"].tap()
+        app.buttons["Play"].tap()
+        XCTAssert(app.buttons["Pause"].label == "Pause")
+    }
 }
