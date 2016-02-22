@@ -63,16 +63,16 @@ class DownloadQueue: Produceable {
                     } else {
                         completion(track: nil)
                     }
-                    return
                 }
             } else if strongself.currentTrack == nil {
                 strongself.currentTrack = strongself.tracks.first
+                completion(track: strongself.currentTrack)
             } else {
-                if let index = strongself.tracks.indexOf(strongself.currentTrack!) where index < strongself.tracks.count {
+                if let index = strongself.tracks.indexOf(strongself.currentTrack!) where index < strongself.tracks.count && strongself.tracks.count >= 2 {
                     strongself.currentTrack = strongself.tracks[index + 1]
+                    completion(track: strongself.currentTrack)
                 }
             }
-            completion(track: strongself.currentTrack)
         }
     }
 
